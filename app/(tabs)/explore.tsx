@@ -1,110 +1,143 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+// CoachDashboard.tsx
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+const COLORS = {
+  primary: "#E4554D",   // red
+  secondary: "#4CAF50", // green
+  background: "#fff",
+  textDark: "#333",
+  textLight: "#777",
+  card: "#f8f8f8",
 
-export default function TabTwoScreen() {
+  ringOuter: "#2E7D32",  // dark green
+  stepsTrack: "#D7F2DA", // light green
+  heartRing: "#1F4AA8",  // blue
+};
+
+const CoachDashboard = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 60 }}>
+        {/* Greeting */}
+        <Text style={styles.greeting}>👋 Welcome back, Fitner!</Text>
+        <Text style={styles.subGreeting}>
+          Here’s your personalized coaching plan
+        </Text>
+
+        {/* Goals Section */}
+        <Text style={styles.sectionTitle}>Your Daily Goals</Text>
+        <View style={styles.cardRow}>
+          <GoalCard icon="walk" title="Steps" value="8,200 / 10,000" />
+          <GoalCard icon="flame" title="Calories" value="1,850 / 2,200" />
+        </View>
+        <View style={styles.cardRow}>
+          <GoalCard icon="bed" title="Sleep" value="6h / 8h" />
+          <GoalCard icon="water" title="Hydration" value="1.5L / 2.5L" />
+        </View>
+
+        {/* Workouts Section */}
+        <Text style={styles.sectionTitle}>Today’s Workouts</Text>
+        <WorkoutCard
+          title="Morning Yoga"
+          time="15 min"
+          icon="leaf"
+          color={COLORS.ringOuter}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+        <WorkoutCard
+          title="Cardio Blast"
+          time="30 min"
+          icon="bicycle"
+          color={COLORS.heartRing}
+        />
+        <WorkoutCard
+          title="Strength Training"
+          time="40 min"
+          icon="barbell"
+          color={COLORS.secondary}
+        />
+
+        {/* Coach Tips */}
+        <Text style={styles.sectionTitle}>Coach’s Tip</Text>
+        <View style={styles.tipCard}>
+          <Ionicons name="bulb" size={24} color={COLORS.primary} />
+          <Text style={styles.tipText}>
+            Consistency is key! Even a short 10-min walk helps you stay active. 💪
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
-}
+};
+
+const GoalCard = ({ icon, title, value }: any) => (
+  <View style={styles.goalCard}>
+    <Ionicons name={icon} size={28} color={"#4f9dc6ff"} />
+    <Text style={styles.goalTitle}>{title}</Text>
+    <Text style={styles.goalValue}>{value}</Text>
+  </View>
+);
+
+const WorkoutCard = ({ title, time, icon, color }: any) => (
+  <TouchableOpacity style={[styles.workoutCard, { borderLeftColor: color }]}>
+    <Ionicons name={icon} size={28} color={color} />
+    <View style={{ marginLeft: 10 }}>
+      <Text style={styles.workoutTitle}>{title}</Text>
+      <Text style={styles.workoutTime}>{time}</Text>
+    </View>
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: { flex: 1, backgroundColor: COLORS.background, padding: 16 },
+  greeting: { fontSize: 24, fontWeight: "bold", color: COLORS.textDark },
+  subGreeting: { fontSize: 16, color: COLORS.textLight, marginBottom: 20 },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: COLORS.textDark,
+    marginTop: 20,
+    marginBottom: 10,
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  cardRow: { flexDirection: "row", justifyContent: "space-between" },
+  goalCard: {
+    flex: 1,
+    backgroundColor: COLORS.card,
+    padding: 16,
+    borderRadius: 12,
+    alignItems: "center",
+    margin: 5,
   },
+  goalTitle: { fontSize: 14, color: COLORS.textLight, marginTop: 4 },
+  goalValue: { fontSize: 16, fontWeight: "bold", color: COLORS.textDark },
+  workoutCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: COLORS.card,
+    padding: 16,
+    borderRadius: 12,
+    marginVertical: 6,
+    borderLeftWidth: 5,
+  },
+  workoutTitle: { fontSize: 16, fontWeight: "600", color: COLORS.textDark },
+  workoutTime: { fontSize: 14, color: COLORS.textLight },
+  tipCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFF3F2",
+    padding: 16,
+    borderRadius: 12,
+    marginVertical: 10,
+  },
+  tipText: { marginLeft: 10, fontSize: 14, color: COLORS.textDark, flex: 1 },
 });
+
+export default CoachDashboard;

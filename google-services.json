@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "977288697284",
+    "project_id": "healthbe-85a56",
+    "storage_bucket": "healthbe-85a56.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977288697284:android:0388a2030b561eac4e8091",
+        "android_client_info": {
+          "package_name": "com.behealthy1.HealthTracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977288697284-ajesapicrogsj11a5t1f111bhnojfs2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.behealthy1.HealthTracker",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "977288697284-lom6b9709omif2dk9ajjoeq92k0tvnc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnKK_wIT0z1kIpNsJQsNyarxyLXHRN5qs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977288697284-lom6b9709omif2dk9ajjoeq92k0tvnc3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
